@@ -59,11 +59,9 @@ root@d9b4bbdd8f1a:/# exit
 
 ```bash
 $ docker run -it --rm -e USER_ID=`id -u` dgricci/jessie /bin/bash
-xuser@15276958e9ec:/$ cat /etc/group
-...
+xuser@15276958e9ec:/$ tail -1 /etc/group
 xuser:x:1000:
-xuser@15276958e9ec:/$ cat /etc/passwd
-...
+xuser@15276958e9ec:/$ tail -1 /etc/passwd
 xuser:x:1000:1000:identity to handle permissions with docker's volumes:/home/xuser:/bin/bash
 xuser@15276958e9ec:/$ exit
 ```
@@ -71,12 +69,10 @@ xuser@15276958e9ec:/$ exit
 * Let's add the group's id :
 
 ```bash
-$ docker run -it --rm -e USER_ID=`id -u` USER_GP=2000 dgricci/jessie /bin/bash
-xuser@5b048fd9ad20:/$ cat /etc/group
-...
+$ docker run -it --rm -e USER_ID=`id -u` -e USER_GP=2000 dgricci/jessie /bin/bash
+xuser@5b048fd9ad20:/$ tail -1 /etc/group
 xuser:x:2000:
-xuser@5b048fd9ad20:/$ cat /etc/passwd
-...
+xuser@5b048fd9ad20:/$ tail -1 /etc/passwd
 xuser:x:1000:2000:identity to handle permissions with docker's volumes:/home/xuser:/bin/bash
 xuser@5b048fd9ad20:/$ exit
 ```
@@ -84,12 +80,10 @@ xuser@5b048fd9ad20:/$ exit
 * Then we add the user's name :
 
 ```bash
-$ docker run -it --rm -e USER_ID=`id -u` USER_GP=2000 USER_NAME=dgricci dgricci/jessie /bin/bash
-dgricci@67f053154b9d:/$ cat /etc/group
-...
+$ docker run -it --rm -e USER_ID=`id -u` -e USER_GP=2000 -e USER_NAME=dgricci dgricci/jessie /bin/bash
+dgricci@67f053154b9d:/$ tail -1 /etc/group
 dgricci:x:2000:
-dgricci@67f053154b9d:/$ cat /etc/passwd
-...
+dgricci@67f053154b9d:/$ tail -1 /etc/passwd
 dgricci:x:1000:2000:identity to handle permissions with docker's volumes:/home/xuser:/bin/bash
 dgricci@67f053154b9d:/$ exit
 ```
@@ -97,13 +91,11 @@ dgricci@67f053154b9d:/$ exit
 * And finally, let's use the debug option :
 
 ```bash
-$ docker run -it --rm -e USER_DEBUG=1 -e USER_ID=$UID USER_GP=`id -g` USER_NAME=$USER dgricci/jessie /bin/bash
+$ docker run -it --rm -e USER_DEBUG=1 -e USER_ID=$UID -e USER_GP=`id -g` -e USER_NAME=$USER dgricci/jessie /bin/bash
 Starting container as 'ricci' (1000:1000)
-ricci@7acb174b3839:/$ cat /etc/group
-...
+ricci@7acb174b3839:/$ tail -1 /etc/group
 ricci:x:1000:
-ricci@7acb174b3839:/$ cat /etc/passwd
-...
+ricci@7acb174b3839:/$ tail -1 /etc/passwd
 ricci:x:1000:1000:identity to handle permissions with docker's volumes:/home/ricci:/bin/bash
 ricci@7acb174b3839:/$ exit
 ```
