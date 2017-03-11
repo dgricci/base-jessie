@@ -32,6 +32,7 @@ RUN dpkg-reconfigure locales
 
 # Cf. https://github.com/docker-library/golang/blob/master/1.6/wheezy/Dockerfile
 COPY adduserifneeded.sh /usr/local/bin/adduserifneeded.sh
+COPY utilities.sh /usr/local/bin/utilities.sh
 
 # always launch this when starting a container (and then execute CMD ...)
 ENTRYPOINT ["adduserifneeded.sh"]
