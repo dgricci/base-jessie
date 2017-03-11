@@ -11,8 +11,8 @@
 # Building #
 
 ```bash
-$ docker build -t dgricci/jessie:0.0.4 .
-$ docker tag dgricci/jessie:0.0.3 dgricci/jessie:latest
+$ docker build -t dgricci/jessie:$(< VERSION) .
+$ docker tag dgricci/jessie:$(< VERSION) dgricci/jessie:latest
 ```
 
 ## Behind a proxy (e.g. 10.0.4.2:3128) ##
@@ -21,7 +21,8 @@ $ docker tag dgricci/jessie:0.0.3 dgricci/jessie:latest
 $ docker build \
     --build-arg http_proxy=http://10.0.4.2:3128/ \
     --build-arg https_proxy=http://10.0.4.2:3128/ \
-    -t dgricci/jessie:0.0.4 .
+    -t dgricci/jessie:$(< VERSION) .
+$ docker tag dgricci/jessie:$(< VERSION) dgricci/jessie:latest
 ```     
 
 ## Build command with arguments default values : ##
@@ -29,8 +30,9 @@ $ docker build \
 ```bash
 $ docker build \
     --build-arg GOSU_VERSION=1.10 \
-    --build-arg GOSU_DOWNLOAD_URL=https://github.com/tianon/gosu/releases/download/1.9/gosu-amd64 \
-    -t dgricci/jessie:0.0.4 .
+    --build-arg GOSU_DOWNLOAD_URL=https://github.com/tianon/gosu/releases/download/1.10/gosu-amd64 \
+    -t dgricci/jessie:$(< VERSION) .
+$ docker tag dgricci/jessie:$(< VERSION) dgricci/jessie:latest
 ``` 
 
 # Use #
